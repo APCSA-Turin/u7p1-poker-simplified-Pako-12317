@@ -25,9 +25,9 @@ public class Player{
         return "Nothing";
     }
 
-    public void SortAllCards(){
+    public void sortAllCards(){
         allCards.sort(null);
-    } 
+    }
 
     public ArrayList<Integer> findRankingFrequency(){
         ArrayList<String> rank = new ArrayList<String>();
