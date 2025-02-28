@@ -40,7 +40,13 @@ public class Player{
     }
 
     public ArrayList<Integer> findSuitFrequency(){
-        return new ArrayList<>(); 
+        ArrayList<String> suit = new ArrayList<String>();
+        ArrayList<Integer> freq = new ArrayList<Integer>();
+        suit.addAll(Arrays.asList("♠", "♥", "♣", "♦"));
+        for (int i = 0; i < suit.size(); i++) {
+            freq.add(i, Collections.frequency(allCards, suit.get(i)));
+        }
+        return freq;  
     }
 
    
