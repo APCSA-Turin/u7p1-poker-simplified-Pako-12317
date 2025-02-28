@@ -25,7 +25,7 @@ public class Player{
         return "Nothing";
     }
 
-    public void SortCards(){
+    public void SortAllCards(){
         allCards.sort(null);
     } 
 
