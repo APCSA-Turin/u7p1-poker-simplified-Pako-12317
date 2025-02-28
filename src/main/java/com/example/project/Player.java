@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import com.example.project.Deck;
-
 
 public class Player{
     private ArrayList<Card> hand;
@@ -20,7 +18,7 @@ public class Player{
     public ArrayList<Card> getAllCards(){return allCards;}
 
     public void addCard(Card c){
-        
+        hand.add(c);
     }
 
     public String playHand(ArrayList<Card> communityCards){      
@@ -28,14 +26,17 @@ public class Player{
     }
 
     public void SortCards(){
-        ArrayList<Card> c = new ArrayList<Card>();
-        c.addAll(allCards);
-        c.addAll(hand);
-        Collections.sort(c, null);;
+        allCards.sort(null);
     } 
 
     public ArrayList<Integer> findRankingFrequency(){
-        return new ArrayList<>(); 
+        ArrayList<String> rank = new ArrayList<String>();
+        ArrayList<Integer> freq = new ArrayList<Integer>();
+        rank.addAll(Arrays.asList("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"));
+        for (int i = 0; i < rank.size(); i++) {
+            freq.add(i, Collections.frequency(allCards, rank.get(i)));
+        }
+        return freq; 
     }
 
     public ArrayList<Integer> findSuitFrequency(){
