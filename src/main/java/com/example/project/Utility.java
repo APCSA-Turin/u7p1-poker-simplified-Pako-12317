@@ -1,8 +1,5 @@
 package com.example.project;
 
-/**
- * Utility class providing helper methods for card and hand evaluations.
- */
 class Utility {
     /**
      * Array of valid card suits.
