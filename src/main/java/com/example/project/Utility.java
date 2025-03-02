@@ -1,28 +1,45 @@
 package com.example.project;
-import java.util.ArrayList;
 
-public class Utility{
-    private static String[] hands = {
-        "Royal Flush",
-        "Straight Flush",
-        "Four of a Kind",
-        "Full House",
-        "Flush",
-        "Straight",
-        "Three of a Kind",
-        "Two Pair",
-        "Pair",
-        "High Card"
-    };
-
-    private static String[] suits  = {"♠","♥","♣", "♦"};
-    private static String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-
-    public static String[] getRanks(){return ranks;}
-    public static String[] getSuits(){return suits;}
-
-    public static int getRankValue(String rank){
-        switch(rank){
+/**
+ * Utility class providing helper methods for card and hand evaluations.
+ */
+class Utility {
+    /**
+     * Array of valid card suits.
+     */
+    private static final String[] suits = {"♠", "♥", "♣", "♦"};
+    
+    /**
+     * Array of valid card ranks.
+     */
+    private static final String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    
+    /**
+     * Retrieves the array of available ranks.
+     * 
+     * @return An array of rank strings.
+     */
+    public static String[] getRanks() {
+        return ranks;
+    }
+    
+    /**
+     * Retrieves the array of available suits.
+     * 
+     * @return An array of suit strings.
+     */
+    public static String[] getSuits() {
+        return suits;
+    }
+    
+    /**
+     * Converts a rank string to its corresponding numerical value.
+     * 
+     * @param rank The rank to convert.
+     * @return The numerical value of the rank, or -1 if invalid.
+     */
+    public static int getRankValue(String rank) {
+        switch (rank) {
             case "2": return 2;
             case "3": return 3;
             case "4": return 4;
@@ -39,9 +56,15 @@ public class Utility{
         }
         return -1;
     }
-
-    public static int getHandRanking(String result){
-        switch(result){
+    
+    /**
+     * Converts a hand ranking string to its numerical value.
+     * 
+     * @param result The hand ranking string.
+     * @return The corresponding numerical value of the hand ranking, or -1 if invalid.
+     */
+    public static int getHandRanking(String result) {
+        switch (result) {
             case "Royal Flush": return 11;
             case "Straight Flush": return 10;
             case "Four of a Kind": return 9;
@@ -56,6 +79,4 @@ public class Utility{
         }
         return -1;
     }
-
-
 }
