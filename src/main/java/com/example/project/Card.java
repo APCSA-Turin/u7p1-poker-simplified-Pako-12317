@@ -5,12 +5,12 @@ package com.example.project;
  */
 public class Card {
     /**
-     * The rank of the card (e.g., "2", "J", "A").
+     * The rank of the card.
      */
     private String rank;
     
     /**
-     * The suit of the card (e.g., "♠", "♥", "♣", "♦").
+     * The suit of the card.
      */
     private String suit;
 
