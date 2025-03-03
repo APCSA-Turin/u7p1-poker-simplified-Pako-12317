@@ -1,8 +1,5 @@
 package com.example.project;
 
-/**
- * Represents a single playing card with a rank and suit.
- */
 public class Card {
     /**
      * The rank of the card.
