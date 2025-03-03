@@ -4,7 +4,7 @@ class Utility {
     /**
      * Array of valid card suits.
      */
-    private static final String[] suits = {"♠", "♥", "♣", "♦"};
+    private static final String[] suits = {"♠", "♦", "♣", "♥"};
     
     /**
      * Array of valid card ranks.
