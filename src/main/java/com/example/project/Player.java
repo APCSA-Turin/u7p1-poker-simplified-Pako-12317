@@ -2,6 +2,7 @@ package com.example.project;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Player {
     /**
@@ -49,15 +50,33 @@ public class Player {
         allCards.addAll(communityCards);
         sortAllCards();
 
-        if (isRoyalFlush()) return "Royal Flush";
-        if (isStraightFlush()) return "Straight Flush";
-        if (isFourOfAKind()) return "Four of a Kind";
-        if (isFullHouse()) return "Full House";
-        if (isFlush()) return "Flush";
-        if (isStraight()) return "Straight";
-        if (isThreeOfAKind()) return "Three of a Kind";
-        if (isTwoPair()) return "Two Pair";
-        if (isPair()) return "A Pair";
+        if (isRoyalFlush()) {
+            return "Royal Flush";
+        }
+        if (isStraightFlush()) {
+            return "Straight Flush";
+        }
+        if (isFourOfAKind()) {
+            return "Four of a Kind";
+        }
+        if (isFullHouse()) {
+            return "Full House";
+        }
+        if (isFlush()) {
+            return "Flush";
+        }
+        if (isStraight()) {
+            return "Straight";
+        }
+        if (isThreeOfAKind()) {
+            return "Three of a Kind";
+        }
+        if (isTwoPair()) {
+            return "Two Pair";
+        }
+        if (isPair()) {
+            return "A Pair";
+        }
         
         Card highestCard = allCards.get(allCards.size() - 1);
         for (Card card : hand) {
@@ -72,7 +91,20 @@ public class Player {
      * Sorts all the player's cards in ascending order by rank.
      */
     public void sortAllCards() {
-        allCards.sort((c1, c2) -> Integer.compare(Utility.getRankValue(c1.getRank()), Utility.getRankValue(c2.getRank())));
+        allCards.sort(new Comparator<Card>() {
+            @Override
+            public int compare(Card c1, Card c2) {
+                int rankValue1 = Utility.getRankValue(c1.getRank());
+                int rankValue2 = Utility.getRankValue(c2.getRank());
+                if (rankValue1 < rankValue2) {
+                    return -1;
+                } else if (rankValue1 > rankValue2) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
     }
 
     /**
@@ -119,7 +151,9 @@ public class Player {
         for (int f : freq) {
             if (f > 0) {
                 count++;
-                if (count == 5) return true;
+                if (count == 5) {
+                    return true;
+                }
             } else {
                 count = 0;
             }
@@ -167,7 +201,18 @@ public class Player {
      * Checks if the player's hand contains Two Pair.
      */
     private boolean isTwoPair() {
-        return findRankingFrequency().stream().filter(f -> f == 2).count() == 2;
+        ArrayList<Integer> freq = findRankingFrequency();
+        int count = 0;
+        for (int f : freq) {
+            if (f == 2) {
+                count++;
+            }
+        }
+        if (count == 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

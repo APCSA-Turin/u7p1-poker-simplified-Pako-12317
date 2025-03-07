@@ -1,5 +1,6 @@
 package com.example.project;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Game {
     /**
@@ -38,15 +39,46 @@ public class Game {
         ArrayList<Card> p1Cards = new ArrayList<>(p1.getHand());
         ArrayList<Card> p2Cards = new ArrayList<>(p2.getHand());
 
-        p1Cards.sort((c1, c2) -> Integer.compare(Utility.getRankValue(c2.getRank()), Utility.getRankValue(c1.getRank())));
-        p2Cards.sort((c1, c2) -> Integer.compare(Utility.getRankValue(c2.getRank()), Utility.getRankValue(c1.getRank())));
+        p1Cards.sort(new Comparator<Card>() {
+            @Override
+            public int compare(Card c1, Card c2) {
+                int rankValue1 = Utility.getRankValue(c1.getRank());
+                int rankValue2 = Utility.getRankValue(c2.getRank());
+                if (rankValue1 < rankValue2) {
+                    return 1;
+                } else if (rankValue1 > rankValue2) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+        p2Cards.sort(new Comparator<Card>() {
+            @Override
+            public int compare(Card c1, Card c2) {
+                int rankValue1 = Utility.getRankValue(c1.getRank());
+                int rankValue2 = Utility.getRankValue(c2.getRank());
+                if (rankValue1 < rankValue2) {
+                    return 1;
+                } else if (rankValue1 > rankValue2) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
 
         for (int i = 0; i < Math.min(p1Cards.size(), p2Cards.size()); i++) {
             int p1Value = Utility.getRankValue(p1Cards.get(i).getRank());
             int p2Value = Utility.getRankValue(p2Cards.get(i).getRank());
             
-            if (p1Value > p2Value) return "Player 1 wins!";
-            if (p2Value > p1Value) return "Player 2 wins!";
+            if (p1Value > p2Value) {
+                return "Player 1 wins!";
+            }
+            if (p2Value > p1Value) {
+                return "Player 2 wins!";
+            }
         }
         return "Tie!";
     }
