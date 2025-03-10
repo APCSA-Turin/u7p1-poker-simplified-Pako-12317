@@ -91,20 +91,17 @@ public class Player {
      * Sorts all the player's cards in ascending order by rank.
      */
     public void sortAllCards() {
-        allCards.sort(new Comparator<Card>() {
-            @Override
-            public int compare(Card c1, Card c2) {
-                int rankValue1 = Utility.getRankValue(c1.getRank());
-                int rankValue2 = Utility.getRankValue(c2.getRank());
-                if (rankValue1 < rankValue2) {
-                    return -1;
-                } else if (rankValue1 > rankValue2) {
-                    return 1;
-                } else {
-                    return 0;
+        for (int i = 0; i < allCards.size() - 1; i++) {
+            for (int j = 0; j < allCards.size() - i - 1; j++) {
+                int rankValue1 = Utility.getRankValue(allCards.get(j).getRank());
+                int rankValue2 = Utility.getRankValue(allCards.get(j + 1).getRank());
+                if (rankValue1 > rankValue2) {
+                    Card temp = allCards.get(j);
+                    allCards.set(j, allCards.get(j + 1));
+                    allCards.set(j + 1, temp);
                 }
             }
-        });
+        }
     }
 
     /**
@@ -139,7 +136,13 @@ public class Player {
      * Checks if the player's hand contains a flush (five cards of the same suit).
      */
     private boolean isFlush() {
-        return findSuitFrequency().contains(5);
+        ArrayList<Integer> freq = findSuitFrequency();
+        for (int f : freq) {
+            if (f == 5) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -179,7 +182,13 @@ public class Player {
      * Checks if the player's hand contains Four of a Kind.
      */
     private boolean isFourOfAKind() {
-        return findRankingFrequency().contains(4);
+        ArrayList<Integer> freq = findRankingFrequency();
+        for (int f : freq) {
+            if (f == 4) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -187,14 +196,29 @@ public class Player {
      */
     private boolean isFullHouse() {
         ArrayList<Integer> freq = findRankingFrequency();
-        return Collections.frequency(freq, 3) == 1 && Collections.frequency(freq, 2) == 1;
+        boolean three = false;
+        boolean two = false;
+        for (int f : freq) {
+            if (f == 3) {
+                three = true;
+            } else if (f == 2) {
+                two = true;
+            }
+        }
+        return three && two;
     }
 
     /**
      * Checks if the player's hand contains Three of a Kind.
      */
     private boolean isThreeOfAKind() {
-        return findRankingFrequency().contains(3);
+        ArrayList<Integer> freq = findRankingFrequency();
+        for (int f : freq) {
+            if (f == 3) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -219,7 +243,13 @@ public class Player {
      * Checks if the player's hand contains a single pair.
      */
     private boolean isPair() {
-        return findRankingFrequency().contains(2);
+        ArrayList<Integer> freq = findRankingFrequency();
+        for (int f : freq) {
+            if (f == 2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
